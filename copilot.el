@@ -71,13 +71,25 @@
   :prefix "copilot-"
   :group 'editing)
 
+(defcustom llama-dir
+  (concat user-emacs-directory "ai-models")
+  "Directory containing llama models."
+  :type 'string
+  :group 'copilot)
+
 (defcustom copilot-bin
-  "wizardcoder-python-34b-v1.0.Q5_K_M.llamafile"
+  (car (directory-files llama-dir nil "\\.llamafile$")) ;first llamafile in dir
   "Path of llamafile executable with LLM weights."
   :type 'string
   :group 'copilot)
 
 ;;;###autoload
+(defun set-copilot-bin ()
+  "Interactively choose the llamafile for copilot."
+  (interactive)
+  (setq copilot-bin (completing-read "llama file:" 
+   (directory-files llama-dir nil "\\.llamafile$"))))
+
 (defun copilot-complete ()
   (interactive)
   (let* ((spot (point))
