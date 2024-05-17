@@ -90,6 +90,7 @@
   (setq copilot-bin (completing-read "llama file:" 
    (directory-files llama-dir nil "\\.llamafile$"))))
 
+;;;###autoload
 (defun copilot-complete ()
   (interactive)
   (let* ((spot (point))
