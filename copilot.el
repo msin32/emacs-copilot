@@ -72,7 +72,7 @@
   :group 'editing)
 
 (defcustom llama-dir
-  (concat user-emacs-directory "ai-models")
+  (concat user-emacs-directory "ai-models/")
   "Directory containing llama models."
   :type 'string
   :group 'copilot)
@@ -87,8 +87,8 @@
 (defun set-copilot-bin ()
   "Interactively choose the llamafile for copilot."
   (interactive)
-  (setq copilot-bin (completing-read "llama file:" 
-   (directory-files llama-dir nil "\\.llamafile$"))))
+  (setq copilot-bin (concat llama-dir "/" (completing-read "llama file:" 
+   (directory-files llama-dir nil "\\.llamafile$")))))
 
 ;;;###autoload
 (defun copilot-complete ()
