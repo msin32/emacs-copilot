@@ -78,7 +78,7 @@
   :group 'copilot)
 
 (defcustom copilot-bin
-  (car (directory-files llama-dir nil "\\.llamafile$")) ;first llamafile in dir
+  (concat llama-dir "/" (car (directory-files llama-dir nil "\\.llamafile$"))) ;first llamafile in dir
   "Path of llamafile executable with LLM weights."
   :type 'string
   :group 'copilot)
