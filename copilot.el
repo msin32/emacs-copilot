@@ -77,6 +77,7 @@
   :type 'string
   :group 'copilot)
 
+;;TODO: add llama.cpp support
 (defcustom copilot-bin
   (concat llama-dir "/" (car (directory-files llama-dir nil "\\.llamafile$"))) ;first llamafile in dir
   "Path of llamafile executable with LLM weights."
@@ -138,12 +139,12 @@ Writing English explanations is forbidden. ")
     ;; run llamafile streaming stdout into buffer catching ctrl-g
     (with-local-quit
       (call-process copilot-bin nil (list (current-buffer) nil) t
-                    "--prompt-cache" cash
-                    "--prompt-cache-all"
+                    ;;"--prompt-cache" cash ;cache args cause "Bad file number" error
+                    ;;"--prompt-cache-all"
                     "--silent-prompt"
                     "--temp" "0"
                     "-c" "1024"
-                    "-ngl" "35"
+                    ;;"-ngl" "35" ;only enable this when using llama.cpp vulkan
                     "-r" "```"
                     "-r" "\n}"
                     "-f" hist))
